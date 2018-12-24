@@ -31,11 +31,13 @@ RUN apk add --no-cache build-base linux-headers openssl-dev libidn-dev lua5.2-de
 # needed for the build
 ADD malloc.h /usr/include
 
-# build
+# build prosody
 RUN cd /opt/prosody/ && ./configure && make
 
+# remove build deps
 RUN apk del build-base linux-headers openssl-dev libidn-dev lua5.2-dev
 
 RUN touch /var/run/prosody.pid && chown prosody:prosody /var/run/prosody.pid
 
+EXPOSE 5222 5269
 CMD ["/opt/prosody/prosodyctl", "start"]
