@@ -1,5 +1,7 @@
 # Simple docker container for prosody
 
+[![](https://images.microbadger.com/badges/image/alex2242/prosody:alpine.svg)](https://microbadger.com/images/alex2242/prosody:alpine) [![](https://images.microbadger.com/badges/version/alex2242/prosody:alpine.svg)](https://microbadger.com/images/alex2242/prosody:alpine)
+
 This docker container is built over alpine and uses the
 [official](https://prosody.im) prosody binaries.
 
