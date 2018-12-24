@@ -23,19 +23,14 @@ RUN apk add tar gzip &&\
     rm /opt/prosody-${PROSODY_VERSION}.tar.gz &&\
     mv /opt/prosody-${PROSODY_VERSION} /opt/prosody
 
-
-# install build deps
-RUN apk add --no-cache build-base linux-headers openssl-dev libidn-dev lua5.2-dev
-
 # replace musl-dev malloc.h because its missing some declaration
 # needed for the build
-ADD malloc.h /usr/include
+ADD malloc.h /opt
 
-# build prosody
-RUN cd /opt/prosody/ && ./configure && make
-
-# remove build deps
-RUN apk del build-base linux-headers openssl-dev libidn-dev lua5.2-dev
+# install build deps & build & remove build deps
+RUN apk add --no-cache build-base linux-headers openssl-dev libidn-dev lua5.2-dev && mv /opt/malloc.h /usr/include &&\
+    cd /opt/prosody/ && ./configure && make &&\
+    apk del build-base linux-headers openssl-dev libidn-dev lua5.2-dev
 
 RUN touch /var/run/prosody.pid && chown prosody:prosody /var/run/prosody.pid
 
