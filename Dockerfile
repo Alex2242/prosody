@@ -36,4 +36,6 @@ RUN cd /opt/prosody/ && ./configure && make
 
 RUN apk del build-base linux-headers openssl-dev libidn-dev lua5.2-dev
 
+RUN touch /var/run/prosody.pid && chown prosody:prosody /var/run/prosody.pid
+
 CMD ["/opt/prosody/prosodyctl", "start"]
