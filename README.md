@@ -35,6 +35,16 @@ services:
       - "6697:6697"
 ```
 
+## Configuration
+
+The prosody configuration file `prosody.cfg.lua` should include the following
+configuration for the container to work:
+
+```lua
+daemonize = false
+pidfile = "/var/run/prosody.pid"
+```
+
 ## Mainline image
 
 This image uses Debian buster as base, prosody is install with apt.
